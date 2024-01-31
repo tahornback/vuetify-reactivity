@@ -2,8 +2,8 @@
   <div class="text-h5 py-2">{{ tableName }}</div>
   <v-data-table
     :headers="[
-      { title: 'Name', value: 'name', width: '50%', fixed: true },
-      { title: 'Value', value: 'value', width: '50%', fixed: true }
+      { title: 'Name', value: 'name', width: '1%', fixed: true },
+      { title: 'Value', value: 'value' }
     ]"
     :items="models"
   >

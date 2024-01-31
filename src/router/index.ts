@@ -4,7 +4,7 @@ import HomeView from '../views/HomeView.vue'
 export const routes = Object.freeze([
   {
     path: '/',
-    name: 'home',
+    name: 'Home',
     component: HomeView
   },
   {
@@ -13,13 +13,18 @@ export const routes = Object.freeze([
     component: () => import('../views/SelfContained.vue')
   },
   {
-    path: '/primitive-prop',
-    name: 'Primitive Prop',
+    path: '/primitive-props',
+    name: 'Primitive Props',
     component: () => import('../views/PrimitivePropView.vue')
   },
   {
+    path: '/shallow-object-prop',
+    name: 'Shallow Object Prop',
+    component: () => import('../views/ShallowObjectPropView.vue')
+  },
+  {
     path: '/about',
-    name: 'about',
+    name: 'About',
     // route level code-splitting
     // this generates a separate chunk (About.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
