@@ -1,16 +1,16 @@
 <template>
   <prop-value-data-table :models="models" table-name="Parent Data" />
   <v-divider class="my-3" />
-  <shallow-object-prop :model-value="parentProp" @update:modelValue="logger"></shallow-object-prop>
+  <shallow-object-prop-with-use-model :model-value="parentProp" @update:modelValue="logger"></shallow-object-prop-with-use-model>
 </template>
 <script lang="ts">
 import { defineComponent, isReactive, isRef, ref } from 'vue'
 import PropValueDataTable from '@/components/PropValueDataTable.vue'
-import ShallowObjectProp from '@/components/ShallowObjectProp.vue'
+import ShallowObjectPropWithUseModel from '@/components/ShallowObjectPropWithUseModel.vue'
 
 export default defineComponent({
   components: {
-    ShallowObjectProp,
+    ShallowObjectPropWithUseModel,
     PropValueDataTable
   },
   setup() {

@@ -23,7 +23,7 @@ interface WatchTriggers {
 }
 
 export default defineComponent({
-  name: 'ShallowObjectProp',
+  name: 'ShallowObjectPropWithUseModel',
   components: { PropValueDataTable, LayoutTemplate },
   props: {
     modelValue: {
