@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {RouterLink, RouterView} from 'vue-router'
+import {routes} from "@/router";
 </script>
 
 <template>
@@ -8,23 +9,19 @@ import {RouterLink, RouterView} from 'vue-router'
       <v-app-bar-title>Reactivity</v-app-bar-title>
       <template #append>
         <header>
-          <div class="wrapper">
             <nav>
-              <RouterLink to="/">Home</RouterLink>
-              <RouterLink to="/about">About</RouterLink>
+              <RouterLink v-for="route in routes" :to="route.path" :key="route.path">{{route.name}}</RouterLink>
             </nav>
-          </div>
         </header>
       </template>
     </v-app-bar>
     <v-main>
+      <v-container fluid class="fill-height">
       <RouterView/>
+      </v-container>
     </v-main>
   </v-app>
 </template>
 
 <style scoped>
-header {
-  //position: fixed;
-}
 </style>
