@@ -1,0 +1,139 @@
+<script lang="ts">
+import {
+  defineComponent,
+  isReactive,
+  isRef,
+  type PropType,
+  reactive,
+  type Ref,
+  useModel,
+  watch
+} from 'vue'
+import LayoutTemplate from '@/components/LayoutTemplate.vue'
+
+interface ModelValue {
+  foo: string
+  fizz: string
+}
+
+interface WatchTriggers {
+  variable: string
+  deep: boolean
+}
+
+export default defineComponent({
+  name: 'ShallowObjectPropWithWatch',
+  components: { LayoutTemplate },
+  props: {
+    modelValue: {
+      type: Object as PropType<ModelValue>,
+      default: () => ({
+        foo: 'bar',
+        fizz: 'buzz'
+      })
+    }
+  },
+  setup(props, { emit }) {
+    const modelValueModel: Ref<ModelValue> = useModel(props, 'modelValue')
+    watch(modelValueModel.value, () => {
+      emit('update:modelValue', modelValueModel.value)
+    })
+    const vs1 = [
+      {
+        name: 'props',
+        isRef: isRef(props),
+        isReactive: isReactive(props),
+        value: props
+      },
+      // This is only reactive because the parent provided a reactive.  There is no magic that makes props.X reactive by default
+      {
+        name: 'props.modelValue',
+        isRef: isRef(props.modelValue),
+        isReactive: isReactive(props.modelValue),
+        value: props.modelValue
+      },
+      {
+        name: 'modelValueModel',
+        isRef: isRef(modelValueModel),
+        isReactive: isReactive(modelValueModel),
+        value: modelValueModel
+      },
+      {
+        name: 'modelValueModel.value',
+        isRef: isRef(modelValueModel.value),
+        isReactive: isReactive(modelValueModel.value),
+        value: modelValueModel.value
+      }
+    ]
+
+    const watchTriggers: WatchTriggers[] = reactive([])
+
+    watch(
+      modelValueModel,
+      (value, oldValue) => {
+        watchTriggers.push({
+          variable: 'modelValueModel',
+          deep: true
+        })
+      },
+      { deep: true }
+    )
+    watch(
+      modelValueModel,
+      (value, oldValue) => {
+        watchTriggers.push({
+          variable: 'modelValueModel',
+          deep: false
+        })
+      },
+      { deep: false }
+    )
+    watch(
+      modelValueModel.value,
+      (value, oldValue) => {
+        watchTriggers.push({
+          variable: 'modelValueModel.value',
+          deep: false
+        })
+      },
+      { deep: false }
+    )
+    watch(
+      props.modelValue,
+      (value, oldValue) => {
+        watchTriggers.push({
+          variable: 'props.modelValue',
+          deep: false
+        })
+      },
+      { deep: false }
+    )
+
+    return {
+      modelValueModel,
+      vs1,
+      watchTriggers
+    }
+  }
+})
+</script>
+
+<template>
+  <layout-template>
+    <template #left>
+      <!-- modelValueModel gets automatically unwrapped in the template -->
+      props.modelValue === modelValueModel.value - {{ modelValue === modelValueModel }}
+      <v-data-table :items="vs1" class="mb-2">
+        <template #bottom />
+      </v-data-table>
+
+      <v-data-table :items="watchTriggers">
+        <template #bottom />
+      </v-data-table>
+    </template>
+    <template #right>
+      <v-text-field label="foo" v-model="modelValueModel.foo" />
+      <v-text-field label="fizz" v-model="modelValueModel.fizz" />
+    </template>
+  </layout-template>
+</template>

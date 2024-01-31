@@ -18,9 +18,14 @@ export const routes = Object.freeze([
     component: () => import('../views/PrimitivePropView.vue')
   },
   {
-    path: '/shallow-object-prop',
+    path: '/shallow-object-prop-useModel',
     name: 'Shallow Object Prop with useModel',
     component: () => import('../views/ShallowObjectPropViewWithUseModel.vue')
+  },
+  {
+    path: '/shallow-object-prop-watch',
+    name: 'Shallow Object Prop with watch',
+    component: () => import('../views/ShallowObjectPropViewWithWatch.vue')
   },
   {
     path: '/about',

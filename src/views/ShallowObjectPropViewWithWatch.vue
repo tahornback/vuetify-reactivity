@@ -1,20 +1,20 @@
 <template>
-  <prop-value-data-table :models="models" table-name="Shallow Object only with useModel" />
+  <prop-value-data-table :models="models" table-name="Shallow Object with additional support" />
   <prop-value-data-table :models="events" table-name="modelValue update events" />
   <v-divider class="my-3" />
-  <shallow-object-prop-with-use-model
+  <shallow-object-prop-with-watch
     :model-value="parentProp"
     @update:modelValue="logger"
-  ></shallow-object-prop-with-use-model>
+  ></shallow-object-prop-with-watch>
 </template>
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
 import PropValueDataTable from '@/components/PropValueDataTable.vue'
-import ShallowObjectPropWithUseModel from '@/components/ShallowObjectPropWithUseModel.vue'
+import ShallowObjectPropWithWatch from '@/components/ShallowObjectPropWithWatch.vue'
 
 export default defineComponent({
   components: {
-    ShallowObjectPropWithUseModel,
+    ShallowObjectPropWithWatch,
     PropValueDataTable
   },
   setup() {
@@ -31,15 +31,17 @@ export default defineComponent({
         value: parentProp
       }
     ]
-
-    // This list is expected to remain empty
     const events = reactive([])
 
     function logger(x: any) {
-      console.log('ShallowObjectPropViewWithUseModel received v-model update', x)
-      // want to display point-in-time value
-      events.push({ name: 'modelValue', value: JSON.stringify(x) })
+      console.log('ShallowObjectPropViewWithWatch received v-model update', x)
+      // want to display point-in-time
+      events.push({
+        name: 'modelValue',
+        value: JSON.stringify(x)
+      })
     }
+
     return {
       parentProp,
       models,
