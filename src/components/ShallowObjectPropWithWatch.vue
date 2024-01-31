@@ -1,5 +1,7 @@
 <script lang="ts">
 import {
+  computed,
+  type ComputedRef,
   defineComponent,
   isReactive,
   isRef,
@@ -7,7 +9,8 @@ import {
   reactive,
   type Ref,
   useModel,
-  watch
+  watch,
+  type WritableComputedRef
 } from 'vue'
 import LayoutTemplate from '@/components/LayoutTemplate.vue'
 
@@ -36,6 +39,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const modelValueModel: Ref<ModelValue> = useModel(props, 'modelValue')
     watch(modelValueModel.value, () => {
+      // This emit isn't necessary since you end up modifying the same object reference anyway
       emit('update:modelValue', modelValueModel.value)
     })
     const vs1 = [
@@ -111,7 +115,7 @@ export default defineComponent({
 
     function onClick() {
       modelValueModel.value = {
-        foo:'child bar',
+        foo: 'child bar',
         fizz: 'child buzz'
       }
     }

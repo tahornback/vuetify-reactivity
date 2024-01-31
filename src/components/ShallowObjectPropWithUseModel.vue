@@ -97,7 +97,7 @@ export default defineComponent({
 
     function onClick() {
       modelValueModel.value = {
-        foo:'child bar',
+        foo: 'child bar',
         fizz: 'child buzz'
       }
     }

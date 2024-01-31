@@ -1,4 +1,10 @@
 <template>
+  <p>
+    This example uses `useModel` to handle v-model changes. This alone is not adequate for object
+    models as `useModel` only tracks the root object, not any of the keys within it, and do
+    `update:useModel` only emits when the root is replaced. Reactivity appears to work in this case,
+    since you end up modifying the same object instance.
+  </p>
   <prop-value-data-table :models="models" table-name="Shallow Object only with useModel" />
   <prop-value-data-table :models="events" table-name="modelValue update events" />
   <v-divider class="my-3" />
