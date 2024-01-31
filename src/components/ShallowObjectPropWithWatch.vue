@@ -109,10 +109,18 @@ export default defineComponent({
       { deep: false }
     )
 
+    function onClick() {
+      modelValueModel.value = {
+        foo:'child bar',
+        fizz: 'child buzz'
+      }
+    }
+
     return {
       modelValueModel,
       vs1,
-      watchTriggers
+      watchTriggers,
+      onClick
     }
   }
 })
@@ -134,6 +142,7 @@ export default defineComponent({
     <template #right>
       <v-text-field label="foo" v-model="modelValueModel.foo" />
       <v-text-field label="fizz" v-model="modelValueModel.fizz" />
+      <v-btn @click="onClick">Reassign modelValueModel.value</v-btn>
     </template>
   </layout-template>
 </template>

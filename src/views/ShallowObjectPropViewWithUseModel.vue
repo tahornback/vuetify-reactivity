@@ -3,7 +3,7 @@
   <prop-value-data-table :models="events" table-name="modelValue update events" />
   <v-divider class="my-3" />
   <shallow-object-prop-with-use-model
-    :model-value="parentProp"
+    v-model="parentProp"
     @update:modelValue="logger"
   ></shallow-object-prop-with-use-model>
 </template>
