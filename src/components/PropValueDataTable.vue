@@ -6,6 +6,7 @@
       { title: 'Value', value: 'value' }
     ]"
     :items="models"
+    items-per-page="-1"
   >
     <template #header.name="{ column }">
       <div class="text-h6">{{ column.title }}</div>

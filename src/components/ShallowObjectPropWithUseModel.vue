@@ -1,5 +1,6 @@
 <script lang="ts">
 import {
+  computed,
   defineComponent,
   isReactive,
   isRef,
@@ -24,7 +25,7 @@ interface WatchTriggers {
 
 export default defineComponent({
   name: 'ShallowObjectPropWithUseModel',
-  components: { PropValueDataTable, LayoutTemplate },
+  components: { LayoutTemplate },
   props: {
     modelValue: {
       type: Object as PropType<ModelValue>,
@@ -36,7 +37,7 @@ export default defineComponent({
   },
   setup(props) {
     const modelValueModel: Ref<ModelValue> = useModel(props, 'modelValue')
-    const vs1 = [
+    const trackedValues = computed(() => [
       {
         name: 'props',
         isRef: isRef(props),
@@ -62,7 +63,7 @@ export default defineComponent({
         isReactive: isReactive(modelValueModel.value),
         value: modelValueModel.value
       }
-    ]
+    ])
 
     const watchTriggers: WatchTriggers[] = reactive([])
 
@@ -104,7 +105,7 @@ export default defineComponent({
 
     return {
       modelValueModel,
-      vs1,
+      trackedValues,
       watchTriggers,
       onClick
     }
@@ -117,11 +118,11 @@ export default defineComponent({
     <template #left>
       <!-- modelValueModel gets automatically unwrapped in the template -->
       props.modelValue === modelValueModel.value - {{ modelValue === modelValueModel }}
-      <v-data-table :items="vs1" class="mb-2">
+      <v-data-table :items="trackedValues" class="mb-2" items-per-page="-1">
         <template #bottom />
       </v-data-table>
 
-      <v-data-table :items="watchTriggers">
+      <v-data-table :items="watchTriggers" items-per-page="-1">
         <template #bottom />
       </v-data-table>
     </template>
