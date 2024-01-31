@@ -1,7 +1,9 @@
 <script>
-import {defineComponent, ref} from "vue";
+import { defineComponent, ref } from 'vue'
+import LayoutTemplate from '@/components/LayoutTemplate.vue'
 
 export default defineComponent({
+  components: { LayoutTemplate },
   setup() {
     const value = ref('default')
     return {
@@ -12,17 +14,13 @@ export default defineComponent({
 </script>
 
 <template>
-  <v-row align="center">
-    <v-col>
-      value: {{ value }}
-    </v-col>
-    <v-divider vertical></v-divider>
-    <v-col>
+  <p class="text-h6">Self-Contained</p>
+  <layout-template>
+    <template #left> value: {{ value }} </template>
+    <template #right>
       <v-text-field v-model="value"></v-text-field>
-    </v-col>
-  </v-row>
+    </template>
+  </layout-template>
 </template>
 
-<style>
-
-</style>
+<style></style>
