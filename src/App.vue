@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {RouterLink, RouterView} from 'vue-router'
-import {routes} from "@/router";
+import { RouterLink, RouterView } from 'vue-router'
+import { routes } from '@/router'
 </script>
 
 <template>
@@ -9,19 +9,20 @@ import {routes} from "@/router";
       <v-app-bar-title>Reactivity</v-app-bar-title>
       <template #append>
         <header>
-            <nav>
-              <RouterLink v-for="route in routes" :to="route.path" :key="route.path">{{route.name}}</RouterLink>
-            </nav>
+          <nav>
+            <RouterLink v-for="route in routes" :to="route.path" :key="route.path">{{
+              route.name
+            }}</RouterLink>
+          </nav>
         </header>
       </template>
     </v-app-bar>
     <v-main>
-      <v-container fluid class="fill-height">
-      <RouterView/>
+      <v-container fluid>
+        <RouterView />
       </v-container>
     </v-main>
   </v-app>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
