@@ -4,7 +4,7 @@
   <shallow-object-prop :model-value="parentProp" @update:modelValue="logger"></shallow-object-prop>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, isReactive, isRef, ref } from 'vue'
 import PropValueDataTable from '@/components/PropValueDataTable.vue'
 import ShallowObjectProp from '@/components/ShallowObjectProp.vue'
 
@@ -14,6 +14,9 @@ export default defineComponent({
     PropValueDataTable
   },
   setup() {
+    // reactivity | parentProp | parentProp.value
+    // isRef      | true       | false
+    // isReactive | false      | true
     const parentProp = ref({
       foo: 'parent bar',
       fizz: 'parent buzz'

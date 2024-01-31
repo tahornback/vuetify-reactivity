@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <v-row align="center">
+  <v-row>
     <v-col>
       <slot name="left"></slot>
     </v-col>

@@ -1,11 +1,25 @@
 <script lang="ts">
-import {defineComponent, isReactive, isRef, type PropType, reactive, type Ref, useModel, watch} from 'vue'
+import {
+  defineComponent,
+  isReactive,
+  isRef,
+  type PropType,
+  reactive,
+  type Ref,
+  useModel,
+  watch
+} from 'vue'
 import LayoutTemplate from '@/components/LayoutTemplate.vue'
 import PropValueDataTable from '@/components/PropValueDataTable.vue'
 
 interface ModelValue {
   foo: string
   fizz: string
+}
+
+interface WatchTriggers {
+  variable: string
+  deep: boolean
 }
 
 export default defineComponent({
@@ -21,67 +35,71 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const fns = [isRef, isReactive];
     const modelValueModel: Ref<ModelValue> = useModel(props, 'modelValue')
+    const vs1 = [
+      {
+        name: 'props',
+        isRef: isRef(props),
+        isReactive: isReactive(props),
+        value: props
+      },
+      // This is only reactive because the parent provided a reactive.  There is no magic that makes props.X reactive by default
+      {
+        name: 'props.modelValue',
+        isRef: isRef(props.modelValue),
+        isReactive: isReactive(props.modelValue),
+        value: props.modelValue
+      },
+      {
+        name: 'modelValueModel',
+        isRef: isRef(modelValueModel),
+        isReactive: isReactive(modelValueModel),
+        value: modelValueModel
+      },
+      {
+        name: 'modelValueModel.value',
+        isRef: isRef(modelValueModel.value),
+        isReactive: isReactive(modelValueModel.value),
+        value: modelValueModel.value
+      }
+    ]
 
-    const vs = [modelValueModel, modelValueModel.value]
-    vs.forEach(v => fns.forEach(fn => console.log(fn(v))))
-    console.log('~~~')
-    const reactiveGuy: ModelValue = reactive(props.modelValue)
-    vs.push(reactiveGuy)
-    vs.forEach(v => fns.forEach(fn => console.log(fn(v))))
+    const watchTriggers: WatchTriggers[] = reactive([])
 
-    const models = [{ name: 'modelValue', value: modelValueModel }]
-    const models2 = [{ name: 'reactiveGuy', value: reactiveGuy }]
     watch(
       modelValueModel,
       (value, oldValue) => {
-        console.log(
-          'ShallowObjectProp detected a deep change in modelValueModel from',
-          oldValue,
-          'to',
-          value
-        )
+        watchTriggers.push({ variable: 'modelValueModel', deep: true })
       },
       { deep: true }
     )
     watch(
       modelValueModel,
       (value, oldValue) => {
-        console.log(
-          'ShallowObjectProp detected a shallow change in modelValueModel from',
-          oldValue,
-          'to',
-          value
-        )
+        watchTriggers.push({ variable: 'modelValueModel', deep: false })
       },
       { deep: false }
     )
     watch(
-        modelValueModel.value,
-        (value, oldValue) => {
-          console.log(
-              'ShallowObjectProp detected a shallow change in modelValueModel.value from',
-              oldValue,
-              'to',
-              value
-          )
-        },
-        { deep: false }
-    )
-    watch(
-      reactiveGuy,
+      modelValueModel.value,
       (value, oldValue) => {
-        console.log(
-          'ShallowObjectProp detected a shallow change in reactiveGuy from',
-          oldValue,
-          'to',
-          value
-        )
+        watchTriggers.push({ variable: 'modelValueModel.value', deep: false })
       },
       { deep: false }
     )
-    return { modelValueModel, models, reactiveGuy, models2 }
+    watch(
+      props.modelValue,
+      (value, oldValue) => {
+        watchTriggers.push({ variable: 'props.modelValue', deep: false })
+      },
+      { deep: false }
+    )
+
+    return {
+      modelValueModel,
+      vs1,
+      watchTriggers
+    }
   }
 })
 </script>
@@ -89,14 +107,19 @@ export default defineComponent({
 <template>
   <layout-template>
     <template #left>
-      <prop-value-data-table :models="models" table-name="Child data" />
-      <prop-value-data-table :models="models2" table-name="Reactive guy" />
+      <!-- modelValueModel gets automatically unwrapped in the template -->
+      props.modelValue === modelValueModel.value - {{ modelValue === modelValueModel }}
+      <v-data-table :items="vs1" class="mb-2">
+        <template #bottom />
+      </v-data-table>
+
+      <v-data-table :items="watchTriggers">
+        <template #bottom />
+      </v-data-table>
     </template>
     <template #right>
       <v-text-field label="foo" v-model="modelValueModel.foo" />
       <v-text-field label="fizz" v-model="modelValueModel.fizz" />
-      <v-text-field label="rfoo" v-model="reactiveGuy.foo" />
-      <v-text-field label="rfizz" v-model="reactiveGuy.fizz" />
     </template>
   </layout-template>
 </template>
