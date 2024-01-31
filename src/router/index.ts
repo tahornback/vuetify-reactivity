@@ -28,6 +28,11 @@ export const routes = Object.freeze([
     component: () => import('../views/ShallowObjectPropViewWithWatch.vue')
   },
   {
+    path: '/shallow-object-prop-custom',
+    name: 'Shallow Object Prop with custom',
+    component: () => import('../views/ShallowObjectPropViewWithCustom.vue')
+  },
+  {
     path: '/about',
     name: 'About',
     // route level code-splitting
