@@ -13,6 +13,11 @@ export const routes = Object.freeze([
     component: () => import('../views/SelfContained.vue')
   },
   {
+    path: '/primitive-prop',
+    name: 'Primitive Prop',
+    component: () => import('../views/PrimitivePropView.vue')
+  },
+  {
     path: '/about',
     name: 'about',
     // route level code-splitting
