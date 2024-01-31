@@ -1,6 +1,6 @@
 <template>
   <p></p>
-  <prop-value-data-table :models="models" table-name="Shallow Object only with useModel" />
+  <prop-value-data-table :models="models" table-name="Shallow Object only with custom" />
   <prop-value-data-table :models="events" table-name="modelValue update events" />
   <v-divider class="my-3" />
   <shallow-object-prop-with-custom
