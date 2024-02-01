@@ -33,6 +33,11 @@ export const routes = Object.freeze([
     component: () => import('../views/ShallowObjectPropViewWithCustom.vue')
   },
   {
+    path: '/shallow-object-prop-custom-composable',
+    name: 'Shallow Object Prop with custom composable',
+    component: () => import('../views/ShallowObjectPropViewWithCustomComposable.vue')
+  },
+  {
     path: '/about',
     name: 'About',
     // route level code-splitting
