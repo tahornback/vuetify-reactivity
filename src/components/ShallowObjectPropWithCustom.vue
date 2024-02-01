@@ -43,7 +43,7 @@ export default defineComponent({
     watch(
       modelValueModel,
       (v) => {
-        emit('update:modelValue', v)
+        emit('update:modelValue', JSON.parse(JSON.stringify(v)))
       },
       { deep: true }
     )

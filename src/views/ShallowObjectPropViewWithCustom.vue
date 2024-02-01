@@ -1,5 +1,5 @@
 <template>
-  <p />
+  <p>This example creates a local copy of the object in the child (with JSON parse/stringify) and emits an event when modified.</p>
   <prop-value-data-table
     :models="models"
     table-name="Shallow Object only with custom"

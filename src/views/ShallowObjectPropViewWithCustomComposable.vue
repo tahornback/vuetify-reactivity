@@ -1,5 +1,11 @@
 <template>
-  <p />
+  <p>
+    This example uses a custom composable based on <a
+      href="https://skirtles-code.github.io/vue-examples/patterns/computed-v-model"
+      target="_blank"
+      rel="noreferrer noopener"
+    >skirtles computed v-model post</a>.
+  </p>
   <prop-value-data-table
     :models="models"
     table-name="Shallow Object only with custom composable"
