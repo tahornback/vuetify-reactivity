@@ -2,16 +2,7 @@
 import { computed, defineComponent, isReactive, isRef, type PropType, reactive, watch } from 'vue'
 import LayoutTemplate from '@/components/LayoutTemplate.vue'
 import useObjectModel from '@/composables/useObjectModel'
-
-interface ModelValue {
-  foo: string
-  fizz: string
-}
-
-interface WatchTriggers {
-  variable: string
-  deep: boolean
-}
+import type { ShallowObjectExampleModelValue, WatchTriggers } from '@/types'
 
 export default defineComponent({
   name: 'ShallowObjectPropWithCustomComposable',
@@ -20,7 +11,7 @@ export default defineComponent({
   },
   props: {
     modelValue: {
-      type: Object as PropType<ModelValue>,
+      type: Object as PropType<ShallowObjectExampleModelValue>,
       default: () => ({
         foo: 'bar',
         fizz: 'buzz'

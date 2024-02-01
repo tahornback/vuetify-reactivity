@@ -11,23 +11,14 @@ import {
   watch
 } from 'vue'
 import LayoutTemplate from '@/components/LayoutTemplate.vue'
-
-interface ModelValue {
-  foo: string
-  fizz: string
-}
-
-interface WatchTriggers {
-  variable: string
-  deep: boolean
-}
+import type { ShallowObjectExampleModelValue, WatchTriggers } from '@/types'
 
 export default defineComponent({
   name: 'ShallowObjectPropWithWatch',
   components: { LayoutTemplate },
   props: {
     modelValue: {
-      type: Object as PropType<ModelValue>,
+      type: Object as PropType<ShallowObjectExampleModelValue>,
       default: () => ({
         foo: 'bar',
         fizz: 'buzz'
@@ -36,7 +27,7 @@ export default defineComponent({
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
-    const modelValueModel: Ref<ModelValue> = useModel(props, 'modelValue')
+    const modelValueModel: Ref<ShallowObjectExampleModelValue> = useModel(props, 'modelValue')
     watch(modelValueModel.value, () => {
       // This emit isn't necessary since you end up modifying the same object reference anyway
       emit('update:modelValue', modelValueModel.value)

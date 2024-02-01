@@ -21,24 +21,26 @@
   <v-divider class="my-3" />
   <shallow-object-prop-with-custom-composable
     v-model="parentProp"
-    @update:model-value="logger"
+    @update:model-value="updateModelValueHandler"
   />
 </template>
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
 import PropValueDataTable from '@/components/PropValueDataTable.vue'
 import ShallowObjectPropWithCustomComposable from '@/components/ShallowObjectPropWithCustomComposable.vue'
+import useSetTrapRef from '@/composables/useSetTrapRef'
 
 export default defineComponent({
   components: {
     ShallowObjectPropWithCustomComposable,
     PropValueDataTable
   },
+  emits: ['show-snackbar'],
   setup () {
     // reactivity | parentProp | parentProp.value
     // isRef      | true       | false
     // isReactive | false      | true
-    const parentProp = ref({
+    const parentProp = useSetTrapRef({
       foo: 'parent bar',
       fizz: 'parent buzz'
     })
@@ -52,7 +54,7 @@ export default defineComponent({
     // This list is expected to remain empty
     const events = reactive([])
 
-    function logger (x: any) {
+    function updateModelValueHandler (x: any) {
       console.log('ShallowObjectPropViewWithCustomComposable received v-model update', x)
       // want to display point-in-time value
       events.push({ name: 'modelValue', value: JSON.stringify(x) })
@@ -67,7 +69,7 @@ export default defineComponent({
     return {
       parentProp,
       models,
-      logger,
+      updateModelValueHandler,
       events,
       onClick
     }

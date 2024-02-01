@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, useModel } from 'vue'
+import { defineComponent, type Ref, useModel } from 'vue'
 import LayoutTemplate from '@/components/LayoutTemplate.vue'
 import PropValueDataTable from '@/components/PropValueDataTable.vue'
 
@@ -21,9 +21,9 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const stringPropModel = useModel(props, 'stringProp')
-    const numberPropModel = useModel(props, 'numberProp')
-    const booleanPropModel = useModel(props, 'booleanProp')
+    const stringPropModel: Ref<string> = useModel(props, 'stringProp')
+    const numberPropModel: Ref<number> = useModel(props, 'numberProp')
+    const booleanPropModel: Ref<boolean> = useModel(props, 'booleanProp')
     const models = [
       { name: 'stringPropModel', value: stringPropModel },
       { name: 'numberPropModel', value: numberPropModel },
