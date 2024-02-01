@@ -8,3 +8,11 @@ body {
   display: block;
   place-items: center;
 }
+
+pre {
+  display: block;
+  border-radius: 8px;
+  background-color: dimgrey;
+  border: 2px solid #008F11;
+  padding: 1em;
+}

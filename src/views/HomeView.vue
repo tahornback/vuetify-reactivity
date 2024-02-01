@@ -1,7 +1,5 @@
-<script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <TheWelcome />
+  <div>Reactivity is weird when you aren't used to it</div>
 </template>
