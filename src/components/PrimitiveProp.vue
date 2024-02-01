@@ -20,7 +20,7 @@ export default defineComponent({
       default: () => false
     }
   },
-  setup(props) {
+  setup (props) {
     const stringPropModel = useModel(props, 'stringProp')
     const numberPropModel = useModel(props, 'numberProp')
     const booleanPropModel = useModel(props, 'booleanProp')
@@ -37,12 +37,21 @@ export default defineComponent({
 <template>
   <layout-template>
     <template #left>
-      <prop-value-data-table :models="models" table-name="Child data" />
+      <prop-value-data-table
+        :models="models"
+        table-name="Child data"
+      />
     </template>
     <template #right>
-      <v-text-field v-model="stringPropModel"></v-text-field>
-      <v-text-field type="number" v-model.number="numberPropModel"></v-text-field>
-      <v-checkbox v-model="booleanPropModel" label="Checked?"></v-checkbox>
+      <v-text-field v-model="stringPropModel" />
+      <v-text-field
+        type="number"
+        v-model.number="numberPropModel"
+      />
+      <v-checkbox
+        v-model="booleanPropModel"
+        label="Checked?"
+      />
     </template>
   </layout-template>
 </template>

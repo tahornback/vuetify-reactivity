@@ -4,7 +4,7 @@ import LayoutTemplate from '@/components/LayoutTemplate.vue'
 
 export default defineComponent({
   components: { LayoutTemplate },
-  setup() {
+  setup () {
     const value = ref('default')
     return {
       value
@@ -14,11 +14,15 @@ export default defineComponent({
 </script>
 
 <template>
-  <p class="text-h6">Self-Contained</p>
+  <p class="text-h6">
+    Self-Contained
+  </p>
   <layout-template>
-    <template #left> value: {{ value }} </template>
+    <template #left>
+      value: {{ value }}
+    </template>
     <template #right>
-      <v-text-field v-model="value"></v-text-field>
+      <v-text-field v-model="value" />
     </template>
   </layout-template>
 </template>

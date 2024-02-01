@@ -5,13 +5,19 @@
     `update:useModel` only emits when the root is replaced. Reactivity appears to work in this case,
     since you end up modifying the same object instance.
   </p>
-  <prop-value-data-table :models="models" table-name="Shallow Object only with useModel" />
-  <prop-value-data-table :models="events" table-name="modelValue update events" />
+  <prop-value-data-table
+    :models="models"
+    table-name="Shallow Object only with useModel"
+  />
+  <prop-value-data-table
+    :models="events"
+    table-name="modelValue update events"
+  />
   <v-divider class="my-3" />
   <shallow-object-prop-with-use-model
     v-model="parentProp"
-    @update:modelValue="logger"
-  ></shallow-object-prop-with-use-model>
+    @update:model-value="logger"
+  />
 </template>
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
@@ -23,7 +29,7 @@ export default defineComponent({
     ShallowObjectPropWithUseModel,
     PropValueDataTable
   },
-  setup() {
+  setup () {
     // reactivity | parentProp | parentProp.value
     // isRef      | true       | false
     // isReactive | false      | true
@@ -41,7 +47,7 @@ export default defineComponent({
     // This list is expected to remain empty
     const events = reactive([])
 
-    function logger(x: any) {
+    function logger (x: any) {
       console.log('ShallowObjectPropViewWithUseModel received v-model update', x)
       // want to display point-in-time value
       events.push({ name: 'modelValue', value: JSON.stringify(x) })

@@ -1,5 +1,7 @@
 <template>
-  <div class="text-h5 py-2">{{ tableName }}</div>
+  <div class="text-h5 py-2">
+    {{ tableName }}
+  </div>
   <v-data-table
     :headers="[
       { title: 'Name', value: 'name', width: '1%', fixed: true },
@@ -9,10 +11,14 @@
     items-per-page="-1"
   >
     <template #header.name="{ column }">
-      <div class="text-h6">{{ column.title }}</div>
+      <div class="text-h6">
+        {{ column.title }}
+      </div>
     </template>
     <template #header.value="{ column }">
-      <div class="text-h6">{{ column.title }}</div>
+      <div class="text-h6">
+        {{ column.title }}
+      </div>
     </template>
     <template #bottom />
   </v-data-table>

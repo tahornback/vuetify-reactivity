@@ -27,7 +27,7 @@ export default defineComponent({
       })
     }
   },
-  setup(props) {
+  setup (props) {
     const modelValueModel = useObjectModel(props, 'modelValue')
 
     const trackedValues = computed(() => [
@@ -62,7 +62,7 @@ export default defineComponent({
 
     watch(
       modelValueModel,
-      (value, oldValue) => {
+      () => {
         watchTriggers.push({
           variable: 'modelValueModel',
           deep: true
@@ -72,7 +72,7 @@ export default defineComponent({
     )
     watch(
       modelValueModel,
-      (value, oldValue) => {
+      () => {
         watchTriggers.push({
           variable: 'modelValueModel',
           deep: false
@@ -82,7 +82,7 @@ export default defineComponent({
     )
     watch(
       props.modelValue,
-      (value, oldValue) => {
+      () => {
         watchTriggers.push({
           variable: 'props.modelValue',
           deep: false
@@ -91,7 +91,7 @@ export default defineComponent({
       { deep: false }
     )
 
-    function onClick() {
+    function onClick () {
       modelValueModel.value = {
         foo: 'child bar',
         fizz: 'child buzz'
@@ -113,18 +113,33 @@ export default defineComponent({
     <template #left>
       <!-- modelValueModel gets automatically unwrapped in the template -->
       props.modelValue === modelValueModel.value - {{ modelValue === modelValueModel }}
-      <v-data-table :items="trackedValues" class="mb-2" items-per-page="-1">
+      <v-data-table
+        :items="trackedValues"
+        class="mb-2"
+        items-per-page="-1"
+      >
         <template #bottom />
       </v-data-table>
 
-      <v-data-table :items="watchTriggers" items-per-page="-1">
+      <v-data-table
+        :items="watchTriggers"
+        items-per-page="-1"
+      >
         <template #bottom />
       </v-data-table>
     </template>
     <template #right>
-      <v-text-field label="foo" v-model="modelValueModel.foo" />
-      <v-text-field label="fizz" v-model="modelValueModel.fizz" />
-      <v-btn @click="onClick">Reassign modelValueModel.value</v-btn>
+      <v-text-field
+        label="foo"
+        v-model="modelValueModel.foo"
+      />
+      <v-text-field
+        label="fizz"
+        v-model="modelValueModel.fizz"
+      />
+      <v-btn @click="onClick">
+        Reassign modelValueModel.value
+      </v-btn>
     </template>
   </layout-template>
 </template>

@@ -16,9 +16,9 @@ export default (props: any, propKey: string) => {
   }
 
   const model = computed({
-    get() {
+    get () {
       return new Proxy(props[propKey], {
-        set(obj, key, value) {
+        set (obj, key, value) {
           model.value = {
             ...obj,
             [key]: value
@@ -27,7 +27,7 @@ export default (props: any, propKey: string) => {
         }
       })
     },
-    set(newValue) {
+    set (newValue) {
       internalInstance!.emit(`update:${propKey}`, newValue)
     }
   })

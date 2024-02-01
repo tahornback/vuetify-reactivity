@@ -1,13 +1,22 @@
 <template>
-  <p></p>
-  <prop-value-data-table :models="models" table-name="Shallow Object only with custom composable" />
-  <prop-value-data-table :models="events" table-name="modelValue update events" />
-  <v-btn text="Reset parent prop" @click="onClick"></v-btn>
+  <p />
+  <prop-value-data-table
+    :models="models"
+    table-name="Shallow Object only with custom composable"
+  />
+  <prop-value-data-table
+    :models="events"
+    table-name="modelValue update events"
+  />
+  <v-btn
+    variant="text"
+    @click="onClick"
+  />
   <v-divider class="my-3" />
   <shallow-object-prop-with-custom-composable
     v-model="parentProp"
-    @update:modelValue="logger"
-  ></shallow-object-prop-with-custom-composable>
+    @update:model-value="logger"
+  />
 </template>
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
@@ -19,7 +28,7 @@ export default defineComponent({
     ShallowObjectPropWithCustomComposable,
     PropValueDataTable
   },
-  setup() {
+  setup () {
     // reactivity | parentProp | parentProp.value
     // isRef      | true       | false
     // isReactive | false      | true
@@ -37,13 +46,13 @@ export default defineComponent({
     // This list is expected to remain empty
     const events = reactive([])
 
-    function logger(x: any) {
+    function logger (x: any) {
       console.log('ShallowObjectPropViewWithCustomComposable received v-model update', x)
       // want to display point-in-time value
       events.push({ name: 'modelValue', value: JSON.stringify(x) })
     }
 
-    function onClick() {
+    function onClick () {
       parentProp.value = {
         foo: 'parent bar',
         fizz: 'parent buzz'

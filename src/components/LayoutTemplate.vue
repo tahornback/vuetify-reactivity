@@ -3,11 +3,11 @@
 <template>
   <v-row>
     <v-col>
-      <slot name="left"></slot>
+      <slot name="left" />
     </v-col>
-    <v-divider vertical></v-divider>
+    <v-divider vertical />
     <v-col>
-      <slot name="right"></slot>
+      <slot name="right" />
     </v-col>
   </v-row>
 </template>

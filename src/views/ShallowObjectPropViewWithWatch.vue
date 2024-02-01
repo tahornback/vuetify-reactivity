@@ -5,13 +5,19 @@
     essence, it works identically to the "Shallow Object Prop with useModel" with decoy events to
     make you think it is working as expected.
   </p>
-  <prop-value-data-table :models="models" table-name="Shallow Object with additional support" />
-  <prop-value-data-table :models="events" table-name="modelValue update events" />
+  <prop-value-data-table
+    :models="models"
+    table-name="Shallow Object with additional support"
+  />
+  <prop-value-data-table
+    :models="events"
+    table-name="modelValue update events"
+  />
   <v-divider class="my-3" />
   <shallow-object-prop-with-watch
     v-model="parentProp"
-    @update:modelValue="logger"
-  ></shallow-object-prop-with-watch>
+    @update:model-value="logger"
+  />
 </template>
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
@@ -23,7 +29,7 @@ export default defineComponent({
     ShallowObjectPropWithWatch,
     PropValueDataTable
   },
-  setup() {
+  setup () {
     // reactivity | parentProp | parentProp.value
     // isRef      | true       | false
     // isReactive | false      | true
@@ -39,7 +45,7 @@ export default defineComponent({
     ]
     const events = reactive([])
 
-    function logger(x: any) {
+    function logger (x: any) {
       console.log('ShallowObjectPropViewWithWatch received v-model update', x)
       // want to display point-in-time
       events.push({

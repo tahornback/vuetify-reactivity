@@ -1,20 +1,15 @@
 <script lang="ts">
 import {
   computed,
-  type ComputedRef,
   defineComponent,
   isReactive,
   isRef,
   type PropType,
   reactive,
   ref,
-  type Ref,
-  useModel,
-  watch,
-  type WritableComputedRef
+  watch
 } from 'vue'
 import LayoutTemplate from '@/components/LayoutTemplate.vue'
-import PropValueDataTable from '@/components/PropValueDataTable.vue'
 
 interface ModelValue {
   foo: string
@@ -28,7 +23,7 @@ interface WatchTriggers {
 
 export default defineComponent({
   name: 'ShallowObjectPropWithUseModel',
-  components: { PropValueDataTable, LayoutTemplate },
+  components: { LayoutTemplate },
   props: {
     modelValue: {
       type: Object as PropType<ModelValue>,
@@ -38,7 +33,8 @@ export default defineComponent({
       })
     }
   },
-  setup(props, { emit }) {
+  emits: ['update:modelValue'],
+  setup (props, { emit }) {
     const modelValueModel = ref(JSON.parse(JSON.stringify(props.modelValue)))
     watch(props.modelValue, () => {
       console.log('props.modelValue watch triggered')
@@ -84,27 +80,27 @@ export default defineComponent({
 
     watch(
       modelValueModel,
-      (value, oldValue) => {
+      () => {
         watchTriggers.push({ variable: 'modelValueModel', deep: true })
       },
       { deep: true }
     )
     watch(
       modelValueModel,
-      (value, oldValue) => {
+      () => {
         watchTriggers.push({ variable: 'modelValueModel', deep: false })
       },
       { deep: false }
     )
     watch(
       props.modelValue,
-      (value, oldValue) => {
+      () => {
         watchTriggers.push({ variable: 'props.modelValue', deep: false })
       },
       { deep: false }
     )
 
-    function onClick() {
+    function onClick () {
       modelValueModel.value = {
         foo: 'child bar',
         fizz: 'child buzz'
@@ -126,18 +122,33 @@ export default defineComponent({
     <template #left>
       <!-- modelValueModel gets automatically unwrapped in the template -->
       props.modelValue === modelValueModel.value - {{ modelValue === modelValueModel }}
-      <v-data-table :items="trackedValues" class="mb-2" items-per-page="-1">
+      <v-data-table
+        :items="trackedValues"
+        class="mb-2"
+        items-per-page="-1"
+      >
         <template #bottom />
       </v-data-table>
 
-      <v-data-table :items="watchTriggers" items-per-page="-1">
+      <v-data-table
+        :items="watchTriggers"
+        items-per-page="-1"
+      >
         <template #bottom />
       </v-data-table>
     </template>
     <template #right>
-      <v-text-field label="foo" v-model="modelValueModel.foo" />
-      <v-text-field label="fizz" v-model="modelValueModel.fizz" />
-      <v-btn @click="onClick">Reassign modelValueModel.value</v-btn>
+      <v-text-field
+        label="foo"
+        v-model="modelValueModel.foo"
+      />
+      <v-text-field
+        label="fizz"
+        v-model="modelValueModel.fizz"
+      />
+      <v-btn @click="onClick">
+        Reassign modelValueModel.value
+      </v-btn>
     </template>
   </layout-template>
 </template>
