@@ -22,13 +22,13 @@
   </RouteLayout>
 </template>
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent } from 'vue'
 import PropValueDataTable from '@/components/helpers/PropValueDataTable.vue'
 import ShallowObjectPropWithCustom from '@/components/shallowObject/ShallowObjectPropWithCustom.vue'
 import useSetTrapRef from '@/composables/useSetTrapRef'
-import { shallowObjectPropDemo } from '@/components/demoComponents'
 import { useRoute } from 'vue-router'
 import RouteLayout from '@/components/helpers/RouteLayout.vue'
+import { shallowObjectPropDemo } from '@/components/shallowObject/shallowObjectDemoComponent'
 
 export default defineComponent({
   components: {

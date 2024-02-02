@@ -7,3 +7,5 @@ export interface WatchTriggers {
     variable: string
     deep: boolean
 }
+
+export type UpdateModelValueHandler = (x: any) => void
