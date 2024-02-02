@@ -53,19 +53,9 @@ export default defineComponent({
       }
     ]
 
-    // This list is expected to remain empty
-    const events = reactive([])
-
-    function updateModelValueHandler (x: any) {
-      console.log('ShallowObjectPropViewWithCustom received v-model update', x)
-      // want to display point-in-time value
-      events.push({ name: 'modelValue', value: JSON.stringify(x) })
-    }
-
-    const { demoComponent } = shallowObjectPropDemo({
+    const { demoComponent, updateModelValueHandler, events } = shallowObjectPropDemo({
       componentName: ShallowObjectPropWithCustom,
-      parentProp,
-      updateModelValueHandler
+      parentProp
     })
 
     return {

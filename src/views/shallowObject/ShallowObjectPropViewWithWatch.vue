@@ -52,27 +52,17 @@ export default defineComponent({
       foo: 'parent bar',
       fizz: 'parent buzz'
     })
+
     const models = [
       {
         name: 'parentProp',
         value: parentProp
       }
     ]
-    const events = reactive([])
 
-    function updateModelValueHandler (x: any) {
-      console.log('ShallowObjectPropViewWithWatch received v-model update', x)
-      // want to display point-in-time
-      events.push({
-        name: 'modelValue',
-        value: JSON.stringify(x)
-      })
-    }
-
-    const { demoComponent } = shallowObjectPropDemo({
+    const { demoComponent, updateModelValueHandler, events } = shallowObjectPropDemo({
       componentName: ShallowObjectPropWithWatch,
-      parentProp,
-      updateModelValueHandler
+      parentProp
     })
 
     return {

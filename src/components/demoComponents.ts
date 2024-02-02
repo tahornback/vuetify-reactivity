@@ -1,4 +1,4 @@
-import { defineComponent, ref } from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 import PrimitiveProps from '@/components/PrimitiveProps.vue'
 import { shortenIndent } from '@/util'
 import ShallowObjectPropViewWithUseModel from '@/views/shallowObject/ShallowObjectPropViewWithUseModel.vue'
@@ -33,11 +33,21 @@ export const primitivePropsDemo = ({
   }
 }
 
+type UpdateModelValueHandler = (x: any) => void
+
 export const shallowObjectPropDemo = ({
   componentName = ShallowObjectPropViewWithUseModel,
   parentProp = ref({}),
-  updateModelValueHandler = () => {}
+  updateModelValueHandler = undefined as UpdateModelValueHandler | undefined
 } = {}) => {
+  const events: {name: string, value: string}[] = reactive([])
+
+  updateModelValueHandler ??= function updateModelValueHandler (x: any) {
+    console.log(`${componentName.name} received v-model update`, x)
+    // want to display point-in-time value
+    events.push({ name: 'modelValue', value: JSON.stringify(x) })
+  }
+
   const demoComponent = defineComponent({
     components: { [componentName.name]: componentName },
     template: shortenIndent(
@@ -56,6 +66,7 @@ export const shallowObjectPropDemo = ({
   return {
     demoComponent,
     parentProp,
-    updateModelValueHandler
+    updateModelValueHandler,
+    events
   }
 }
