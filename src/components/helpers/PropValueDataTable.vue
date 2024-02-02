@@ -1,5 +1,8 @@
 <template>
-  <div class="text-h5 py-2">
+  <div
+    v-if="tableName"
+    class="text-h5 py-2"
+  >
     {{ tableName }}
   </div>
   <v-data-table
@@ -29,11 +32,11 @@ interface Props {
     name: string
     value: any
   }[]
-  tableName: string
+  tableName?: string
 }
 
 withDefaults(defineProps<Props>(), {
   models: () => [],
-  tableName: () => 'default table name'
+  tableName: undefined
 })
 </script>

@@ -102,8 +102,6 @@ export default defineComponent({
 <template>
   <layout-template>
     <template #left>
-      <!-- modelValueModel gets automatically unwrapped in the template -->
-      props.modelValue === modelValueModel.value - {{ modelValue === modelValueModel }}
       <v-data-table
         :items="trackedValues"
         class="mb-2"

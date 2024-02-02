@@ -12,11 +12,11 @@
     <template #parentData>
       <prop-value-data-table
         :models="models"
-        table-name="Shallow Object only with custom"
+        table-name="Parent details"
       />
       <prop-value-data-table
         :models="events"
-        table-name="modelValue update events"
+        table-name="update:modelValue events"
       />
     </template>
     <template #child>
