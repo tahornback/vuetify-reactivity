@@ -1,2 +1,12 @@
-TODO: make a full page layout template since pretty much all the pages have the same structure.
-Will have slots for info, child usage, parent data, and child impl, basically how the tooltip says
+<template>
+  <h1><slot name="header" /></h1>
+  <slot name="info" />
+  <pre><code><slot name="code" /></code></pre>
+  <slot name="parentData" />
+  <v-divider class="my-3" />
+  <slot name="child" />
+</template>
+
+<script setup lang="ts">
+
+</script>

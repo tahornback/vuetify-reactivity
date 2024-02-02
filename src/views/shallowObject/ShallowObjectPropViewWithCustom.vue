@@ -1,17 +1,28 @@
 <template>
-  <h1>{{ route.name }}</h1>
-  <p>This example creates a local copy of the object in the child (with JSON parse/stringify) and emits an event when modified.</p>
-  <pre><code>{{ demoComponent.template }}</code></pre>
-  <prop-value-data-table
-    :models="models"
-    table-name="Shallow Object only with custom"
-  />
-  <prop-value-data-table
-    :models="events"
-    table-name="modelValue update events"
-  />
-  <v-divider class="my-3" />
-  <component :is="demoComponent" />
+  <RouteLayout>
+    <template #header>
+      {{ route.name }}
+    </template>
+    <template #info>
+      This example creates a local copy of the object in the child (with JSON parse/stringify) and emits an event when modified.
+    </template>
+    <template #code>
+      {{ demoComponent.template }}
+    </template>
+    <template #parentData>
+      <prop-value-data-table
+        :models="models"
+        table-name="Shallow Object only with custom"
+      />
+      <prop-value-data-table
+        :models="events"
+        table-name="modelValue update events"
+      />
+    </template>
+    <template #child>
+      <component :is="demoComponent" />
+    </template>
+  </RouteLayout>
 </template>
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
@@ -20,9 +31,11 @@ import ShallowObjectPropWithCustom from '@/components/shallowObject/ShallowObjec
 import useSetTrapRef from '@/composables/useSetTrapRef'
 import { shallowObjectPropDemo } from '@/components/demoComponents'
 import { useRoute } from 'vue-router'
+import RouteLayout from '@/components/helpers/RouteLayout.vue'
 
 export default defineComponent({
   components: {
+    RouteLayout,
     ShallowObjectPropWithCustom,
     PropValueDataTable
   },
