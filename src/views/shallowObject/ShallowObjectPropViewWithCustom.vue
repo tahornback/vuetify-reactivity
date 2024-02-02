@@ -1,8 +1,5 @@
 <template>
   <RouteLayout>
-    <template #header>
-      {{ route.name }}
-    </template>
     <template #info>
       This example creates a local copy of the object in the child (with JSON parse/stringify) and emits an event when modified.
     </template>

@@ -1,27 +1,35 @@
 <template>
-  <h1>{{ route.name }}</h1>
-  <p>
-    This example uses a custom composable based on <a
-      href="https://skirtles-code.github.io/vue-examples/patterns/computed-v-model"
-      target="_blank"
-      rel="noreferrer noopener"
-    >skirtles computed v-model post</a>.
-  </p>
-  <pre><code>{{ demoComponent.template }}</code></pre>
-  <prop-value-data-table
-    :models="models"
-    table-name="Shallow Object only with custom composable"
-  />
-  <prop-value-data-table
-    :models="events"
-    table-name="modelValue update events"
-  />
-  <v-btn
-    variant="text"
-    @click="onClick"
-  />
-  <v-divider class="my-3" />
-  <component :is="demoComponent" />
+  <route-layout>
+    <template #info>
+      <p>
+        This example uses a custom composable based on <a
+          href="https://skirtles-code.github.io/vue-examples/patterns/computed-v-model"
+          target="_blank"
+          rel="noreferrer noopener"
+        >skirtles computed v-model post</a>.
+      </p>
+    </template>
+    <template #code>
+      {{ demoComponent.template }}
+    </template>
+    <template #parentData>
+      <prop-value-data-table
+        :models="models"
+        table-name="Shallow Object only with custom composable"
+      />
+      <prop-value-data-table
+        :models="events"
+        table-name="modelValue update events"
+      />
+      <v-btn
+        variant="text"
+        @click="onClick"
+      />
+    </template>
+    <template #child>
+      <component :is="demoComponent" />
+    </template>
+  </route-layout>
 </template>
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
@@ -31,9 +39,11 @@ import useSetTrapRef from '@/composables/useSetTrapRef'
 import { shallowObjectPropDemo } from '@/components/demoComponents'
 import ShallowObjectPropWithUseModel from '@/components/shallowObject/ShallowObjectPropWithUseModel.vue'
 import { useRoute } from 'vue-router'
+import RouteLayout from '@/components/helpers/RouteLayout.vue'
 
 export default defineComponent({
   components: {
+    RouteLayout,
     ShallowObjectPropWithCustomComposable,
     PropValueDataTable
   },

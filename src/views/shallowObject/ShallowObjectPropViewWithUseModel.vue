@@ -1,22 +1,30 @@
 <template>
-  <h1>{{ route.name }}</h1>
-  <p>
-    This example uses `useModel` to handle v-model changes. This alone is not adequate for object
-    models as `useModel` only tracks the root object, not any of the keys within it, and so
-    `update:useModel` only emits when the root is replaced. Reactivity appears to work in this case,
-    since you end up modifying the same object instance.
-  </p>
-  <pre><code>{{ demoComponent.template }}</code></pre>
-  <prop-value-data-table
-    :models="models"
-    table-name="Shallow Object only with useModel"
-  />
-  <prop-value-data-table
-    :models="events"
-    table-name="modelValue update events"
-  />
-  <v-divider class="my-3" />
-  <component :is="demoComponent" />
+  <route-layout>
+    <template #info>
+      <p>
+        This example uses `useModel` to handle v-model changes. This alone is not adequate for object
+        models as `useModel` only tracks the root object, not any of the keys within it, and so
+        `update:useModel` only emits when the root is replaced. Reactivity appears to work in this case,
+        since you end up modifying the same object instance.
+      </p>
+    </template>
+    <template #code>
+      {{ demoComponent.template }}
+    </template>
+    <template #parentData>
+      <prop-value-data-table
+        :models="models"
+        table-name="Shallow Object only with useModel"
+      />
+      <prop-value-data-table
+        :models="events"
+        table-name="modelValue update events"
+      />
+    </template>
+    <template #child>
+      <component :is="demoComponent" />
+    </template>
+  </route-layout>
 </template>
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
@@ -25,9 +33,11 @@ import ShallowObjectPropWithUseModel from '@/components/shallowObject/ShallowObj
 import useSetTrapRef from '@/composables/useSetTrapRef'
 import { shallowObjectPropDemo } from '@/components/demoComponents'
 import { useRoute } from 'vue-router'
+import RouteLayout from '@/components/helpers/RouteLayout.vue'
 
 export default defineComponent({
   components: {
+    RouteLayout,
     ShallowObjectPropWithUseModel,
     PropValueDataTable
   },
