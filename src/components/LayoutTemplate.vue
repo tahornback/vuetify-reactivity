@@ -12,4 +12,10 @@
   </v-row>
 </template>
 
-<style scoped></style>
+<style scoped>
+.v-row {
+  margin: 4px;
+  border-radius: 4px;
+  border: 2px solid dimgrey;
+}
+</style>
