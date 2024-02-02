@@ -1,11 +1,11 @@
 <script lang="ts">
 import { defineComponent, type Ref, useModel } from 'vue'
-import LayoutTemplate from '@/components/helpers/LayoutTemplate.vue'
+import ChildLayout from '@/components/helpers/ChildLayout.vue'
 import PropValueDataTable from '@/components/helpers/PropValueDataTable.vue'
 
 export default defineComponent({
   name: 'PrimitiveProps',
-  components: { PropValueDataTable, LayoutTemplate },
+  components: { PropValueDataTable, ChildLayout },
   props: {
     stringProp: {
       type: String,

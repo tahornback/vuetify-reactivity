@@ -1,10 +1,10 @@
 <script>
 import { defineComponent, ref } from 'vue'
-import LayoutTemplate from '@/components/helpers/LayoutTemplate.vue'
+import ChildLayout from '@/components/helpers/ChildLayout.vue'
 import RouteLayout from '@/components/helpers/RouteLayout.vue'
 
 export default defineComponent({
-  components: { RouteLayout, LayoutTemplate },
+  components: { RouteLayout, ChildLayout },
   setup () {
     const value = ref('default')
     return {

@@ -34,6 +34,7 @@ interface Props {
   }[]
   tableName?: string
 }
+// TODO: public interface for data table to make sure headers match
 
 withDefaults(defineProps<Props>(), {
   models: () => [],

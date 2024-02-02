@@ -1,11 +1,11 @@
 <script lang="ts">
 import { computed, defineComponent, isReactive, isRef, type PropType, reactive, type Ref, useModel, watch } from 'vue'
-import LayoutTemplate from '@/components/helpers/LayoutTemplate.vue'
+import ChildLayout from '@/components/helpers/ChildLayout.vue'
 import type { ShallowObjectExampleModelValue, WatchTriggers } from '@/types'
 
 export default defineComponent({
   name: 'ShallowObjectPropWithWatch',
-  components: { LayoutTemplate },
+  components: { ChildLayout },
   props: {
     modelValue: {
       type: Object as PropType<ShallowObjectExampleModelValue>,
