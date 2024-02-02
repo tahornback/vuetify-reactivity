@@ -24,7 +24,6 @@
 import { defineComponent } from 'vue'
 import PropValueDataTable from '@/components/helpers/PropValueDataTable.vue'
 import ShallowObjectPropWithUseModel from '@/components/shallowObject/ShallowObjectPropWithUseModel.vue'
-import useSetTrapRef from '@/composables/useSetTrapRef'
 import { useRoute } from 'vue-router'
 import RouteLayout from '@/components/helpers/RouteLayout.vue'
 import { shallowObjectPropDemo } from '@/components/shallowObject/shallowObjectDemoComponent'
@@ -32,18 +31,14 @@ import { shallowObjectPropDemo } from '@/components/shallowObject/shallowObjectD
 export default defineComponent({
   components: {
     RouteLayout,
-    ShallowObjectPropWithUseModel,
     PropValueDataTable
   },
   emits: ['show-snackbar'],
   setup () {
     const route = useRoute()
-    // reactivity | parentProp | parentProp.value
-    // isRef      | true       | false
-    // isReactive | false      | true
-    const parentProp = useSetTrapRef({
-      foo: 'parent bar',
-      fizz: 'parent buzz'
+
+    const { demoComponent, updateModelValueHandler, events, parentProp } = shallowObjectPropDemo({
+      componentName: ShallowObjectPropWithUseModel
     })
 
     const models = [
@@ -52,11 +47,6 @@ export default defineComponent({
         value: parentProp
       }
     ]
-
-    const { demoComponent, updateModelValueHandler, events } = shallowObjectPropDemo({
-      componentName: ShallowObjectPropWithUseModel,
-      parentProp
-    })
 
     return {
       demoComponent,
