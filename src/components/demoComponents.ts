@@ -1,6 +1,7 @@
 import { defineComponent, ref } from 'vue'
 import PrimitiveProps from '@/components/PrimitiveProps.vue'
 import { shortenIndent } from '@/util'
+import ShallowObjectPropViewWithUseModel from '@/views/shallowObject/ShallowObjectPropViewWithUseModel.vue'
 
 export const primitivePropsDemo = ({
   stringProp = ref(''),
@@ -29,5 +30,32 @@ export const primitivePropsDemo = ({
     stringProp,
     numProp,
     boolProp
+  }
+}
+
+export const shallowObjectPropDemo = ({
+  componentName = ShallowObjectPropViewWithUseModel,
+  parentProp = ref({}),
+  updateModelValueHandler = () => {}
+} = {}) => {
+  const demoComponent = defineComponent({
+    components: { [componentName.name]: componentName },
+    template: shortenIndent(
+    `
+      <${componentName.name}
+        v-model="parentProp"
+        @update:model-value="updateModelValueHandler"
+      />
+    `),
+    data: () => ({
+      parentProp,
+      updateModelValueHandler
+    })
+  })
+
+  return {
+    demoComponent,
+    parentProp,
+    updateModelValueHandler
   }
 }

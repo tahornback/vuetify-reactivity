@@ -10,7 +10,7 @@ export const routes = Object.freeze([
   {
     path: '/single-component',
     name: 'Self-Contained Component',
-    component: () => import('../views/SelfContained.vue')
+    component: () => import('../views/SelfContainedView.vue')
   },
   {
     path: '/primitive-props',

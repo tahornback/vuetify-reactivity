@@ -1,4 +1,5 @@
 <template>
+  <h1>{{ route.name }}</h1>
   <p>
     This example uses a custom composable based on <a
       href="https://skirtles-code.github.io/vue-examples/patterns/computed-v-model"
@@ -6,6 +7,7 @@
       rel="noreferrer noopener"
     >skirtles computed v-model post</a>.
   </p>
+  <pre><code>{{ demoComponent.template }}</code></pre>
   <prop-value-data-table
     :models="models"
     table-name="Shallow Object only with custom composable"
@@ -19,16 +21,16 @@
     @click="onClick"
   />
   <v-divider class="my-3" />
-  <shallow-object-prop-with-custom-composable
-    v-model="parentProp"
-    @update:model-value="updateModelValueHandler"
-  />
+  <component :is="demoComponent" />
 </template>
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
 import PropValueDataTable from '@/components/helpers/PropValueDataTable.vue'
 import ShallowObjectPropWithCustomComposable from '@/components/shallowObject/ShallowObjectPropWithCustomComposable.vue'
 import useSetTrapRef from '@/composables/useSetTrapRef'
+import { shallowObjectPropDemo } from '@/components/demoComponents'
+import ShallowObjectPropWithUseModel from '@/components/shallowObject/ShallowObjectPropWithUseModel.vue'
+import { useRoute } from 'vue-router'
 
 export default defineComponent({
   components: {
@@ -37,6 +39,7 @@ export default defineComponent({
   },
   emits: ['show-snackbar'],
   setup () {
+    const route = useRoute()
     // reactivity | parentProp | parentProp.value
     // isRef      | true       | false
     // isReactive | false      | true
@@ -60,6 +63,12 @@ export default defineComponent({
       events.push({ name: 'modelValue', value: JSON.stringify(x) })
     }
 
+    const { demoComponent } = shallowObjectPropDemo({
+      componentName: ShallowObjectPropWithCustomComposable,
+      parentProp,
+      updateModelValueHandler
+    })
+
     function onClick () {
       parentProp.value = {
         foo: 'parent bar',
@@ -67,11 +76,13 @@ export default defineComponent({
       }
     }
     return {
+      demoComponent,
       parentProp,
       models,
       updateModelValueHandler,
       events,
-      onClick
+      onClick,
+      route
     }
   }
 })

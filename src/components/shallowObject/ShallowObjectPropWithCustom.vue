@@ -4,7 +4,7 @@ import LayoutTemplate from '@/components/helpers/LayoutTemplate.vue'
 import type { ShallowObjectExampleModelValue, WatchTriggers } from '@/types'
 
 export default defineComponent({
-  name: 'ShallowObjectPropWithUseModel',
+  name: 'ShallowObjectPropWithUseCustom',
   components: { LayoutTemplate },
   props: {
     modelValue: {
