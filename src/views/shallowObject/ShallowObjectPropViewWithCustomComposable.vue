@@ -30,7 +30,6 @@
 import { defineComponent } from 'vue'
 import PropValueDataTable from '@/components/helpers/PropValueDataTable.vue'
 import ShallowObjectPropWithCustomComposable from '@/components/shallowObject/ShallowObjectPropWithCustomComposable.vue'
-import { useRoute } from 'vue-router'
 import RouteLayout from '@/components/helpers/RouteLayout.vue'
 import { shallowObjectPropDemo } from '@/components/shallowObject/shallowObjectDemoComponent'
 
@@ -41,18 +40,9 @@ export default defineComponent({
   },
   emits: ['show-snackbar'],
   setup () {
-    const route = useRoute()
-
-    const { demoComponent, updateModelValueHandler, events, parentProp } = shallowObjectPropDemo({
+    const { demoComponent, updateModelValueHandler, events, parentProp, models } = shallowObjectPropDemo({
       componentName: ShallowObjectPropWithCustomComposable
     })
-
-    const models = [
-      {
-        name: 'parentProp',
-        value: parentProp
-      }
-    ]
 
     function onClick () {
       parentProp.value = {
@@ -66,8 +56,7 @@ export default defineComponent({
       models,
       updateModelValueHandler,
       events,
-      onClick,
-      route
+      onClick
     }
   }
 })

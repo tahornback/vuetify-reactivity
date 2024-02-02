@@ -15,6 +15,13 @@ export const shallowObjectPropDemo = ({
     fizz: 'parent buzz'
   })
 
+  const models = [
+    {
+      name: 'parentProp',
+      value: parentProp
+    }
+  ]
+
   const events: {name: string, value: string}[] = reactive([])
 
   updateModelValueHandler ??= function updateModelValueHandler (x: any) {
@@ -31,6 +38,7 @@ export const shallowObjectPropDemo = ({
         v-model="parentProp"
         @update:model-value="updateModelValueHandler"
       />
+      <div>{{$data.parentProp}}</div>
     `),
     data: () => ({
       parentProp,
@@ -42,6 +50,7 @@ export const shallowObjectPropDemo = ({
     demoComponent,
     parentProp,
     updateModelValueHandler,
-    events
+    events,
+    models
   }
 }
