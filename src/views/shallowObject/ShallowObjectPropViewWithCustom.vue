@@ -1,10 +1,7 @@
 <template>
-  <RouteLayout>
+  <RouteLayout :component="demoComponent">
     <template #info>
       This example creates a local copy of the object in the child (with JSON parse/stringify) and emits an event when modified.
-    </template>
-    <template #code>
-      {{ demoComponent.template }}
     </template>
     <template #parentData>
       <prop-value-data-table
@@ -15,9 +12,6 @@
         :models="events"
         table-name="update:modelValue events"
       />
-    </template>
-    <template #child>
-      <component :is="demoComponent" />
     </template>
   </RouteLayout>
 </template>

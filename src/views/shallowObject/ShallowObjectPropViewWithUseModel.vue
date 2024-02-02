@@ -1,5 +1,5 @@
 <template>
-  <route-layout>
+  <route-layout :component="demoComponent">
     <template #info>
       <p>
         This example uses `useModel` to handle v-model changes. This alone is not adequate for object
@@ -7,9 +7,6 @@
         `update:useModel` only emits when the root is replaced. Reactivity appears to work in this case,
         since you end up modifying the same object instance.
       </p>
-    </template>
-    <template #code>
-      {{ demoComponent.template }}
     </template>
     <template #parentData>
       <prop-value-data-table
@@ -20,9 +17,6 @@
         :models="events"
         table-name="modelValue update events"
       />
-    </template>
-    <template #child>
-      <component :is="demoComponent" />
     </template>
   </route-layout>
 </template>

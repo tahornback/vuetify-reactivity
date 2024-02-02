@@ -1,5 +1,5 @@
 <template>
-  <route-layout>
+  <route-layout :component="demoComponent">
     <template #info>
       <p>
         This example uses `useModel` plus `watch`. Although in this case `update:modelValue` emits on
@@ -7,9 +7,6 @@
         essence, it works identically to the "Shallow Object Prop with useModel" with decoy events to
         make you think it is working as expected.
       </p>
-    </template>
-    <template #code>
-      {{ demoComponent.template }}
     </template>
     <template #parentData>
       <prop-value-data-table
@@ -20,9 +17,6 @@
         :models="events"
         table-name="modelValue update events"
       />
-    </template>
-    <template #child>
-      <component :is="demoComponent" />
     </template>
   </route-layout>
 </template>

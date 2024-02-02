@@ -1,16 +1,14 @@
 <template>
-  <route-layout>
+  <route-layout :component="demoComponent">
     <template #info>
       <p>
+        ✅
         This example uses a custom composable based on <a
           href="https://skirtles-code.github.io/vue-examples/patterns/computed-v-model"
           target="_blank"
           rel="noreferrer noopener"
         >skirtles computed v-model post</a>.
       </p>
-    </template>
-    <template #code>
-      {{ demoComponent.template }}
     </template>
     <template #parentData>
       <prop-value-data-table
@@ -25,9 +23,6 @@
         variant="text"
         @click="onClick"
       />
-    </template>
-    <template #child>
-      <component :is="demoComponent" />
     </template>
   </route-layout>
 </template>
