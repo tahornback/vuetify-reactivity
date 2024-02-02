@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 import ChildLayout from '@/components/helpers/ChildLayout.vue'
 import RouteLayout from '@/components/helpers/RouteLayout.vue'

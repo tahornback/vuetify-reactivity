@@ -24,8 +24,8 @@
 import PrimitiveProps from '@/components/PrimitiveProps.vue'
 import { defineComponent, ref } from 'vue'
 import PropValueDataTable from '@/components/helpers/PropValueDataTable.vue'
-import { primitivePropsDemo } from '@/components/demoComponents'
 import RouteLayout from '@/components/helpers/RouteLayout.vue'
+import { primitivePropsDemo } from '@/components/primitivePropsDemoComponent'
 
 export default defineComponent({
   components: { RouteLayout, PropValueDataTable, PrimitiveProps },
