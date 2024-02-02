@@ -6,19 +6,28 @@ export const primitivePropsDemo = ({
   stringProp = ref(''),
   numProp = ref(0),
   boolProp = ref(false)
-} = {}) => defineComponent({
-  components: { PrimitiveProp },
-  template: shortenIndent(
-    `
+} = {}) => {
+  const demoComponent = defineComponent({
+    components: { PrimitiveProp },
+    template: shortenIndent(
+        `
       <PrimitiveProp
         v-model:string-prop="stringProp"
         v-model:number-prop="numProp"
         v-model:boolean-prop="boolProp"
       />
     `),
-  data: () => ({
+    data: () => ({
+      stringProp,
+      numProp,
+      boolProp
+    })
+  })
+
+  return {
+    demoComponent,
     stringProp,
     numProp,
     boolProp
-  })
-})
+  }
+}

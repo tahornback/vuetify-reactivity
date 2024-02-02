@@ -3,6 +3,9 @@
     This example creates refs with primitive values in the parent and provides each one individually through multiple
     v-models.
   </p>
+  <div class="text-h5">
+    Parent usage
+  </div>
   <pre><code>{{ demoComponent.template }}</code></pre>
   <prop-value-data-table
     :models="models"
@@ -29,7 +32,11 @@ export default defineComponent({
       { name: 'boolProp', value: boolProp }
     ]
 
-    const demoComponent = primitivePropsDemo()
+    const { demoComponent } = primitivePropsDemo({
+      stringProp,
+      numProp,
+      boolProp
+    })
 
     return {
       demoComponent,

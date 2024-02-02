@@ -46,8 +46,22 @@ const onNavIconClicked = () => {
     </v-list>
   </v-navigation-drawer>
   <v-app-bar>
-    <v-app-bar-nav-icon @click="onNavIconClicked" />
+    <template #prepend>
+      <v-app-bar-nav-icon @click="onNavIconClicked" />
+    </template>
     <v-app-bar-title>Reactivity</v-app-bar-title>
+    <template #append>
+      <v-btn icon>
+        <v-icon icon="fas fa-circle-info" />
+        <v-tooltip activator="parent">
+          Page Layout:<br>
+          Blurb on purpose of example<br>
+          Usage of child component at bottom of page<br>
+          Data that the parent currently owns/has access to and caught event info<br>
+          Child component with current state and fields to modify
+        </v-tooltip>
+      </v-btn>
+    </template>
   </v-app-bar>
   <v-main>
     <slot />
