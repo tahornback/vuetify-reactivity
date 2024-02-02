@@ -100,7 +100,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <layout-template>
+  <child-layout>
     <template #left>
       <v-data-table
         :items="trackedValues"
@@ -130,5 +130,5 @@ export default defineComponent({
         Reassign modelValueModel.value
       </v-btn>
     </template>
-  </layout-template>
+  </child-layout>
 </template>

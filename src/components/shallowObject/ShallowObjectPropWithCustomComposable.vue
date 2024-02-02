@@ -100,7 +100,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <layout-template>
+  <child-layout>
     <template #left>
       <!-- modelValueModel gets automatically unwrapped in the template -->
       props.modelValue === modelValueModel.value - {{ modelValue === modelValueModel }}
@@ -132,5 +132,5 @@ export default defineComponent({
         Reassign modelValueModel.value
       </v-btn>
     </template>
-  </layout-template>
+  </child-layout>
 </template>

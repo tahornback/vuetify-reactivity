@@ -17,14 +17,14 @@ export default defineComponent({
 <template>
   <route-layout>
     <template #child>
-      <layout-template>
+      <child-layout>
         <template #left>
           value: {{ value }}
         </template>
         <template #right>
           <v-text-field v-model="value" />
         </template>
-      </layout-template>
+      </child-layout>
     </template>
   </route-layout>
 </template>

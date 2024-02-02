@@ -35,7 +35,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <layout-template>
+  <child-layout>
     <template #left>
       <prop-value-data-table
         :models="models"
@@ -53,5 +53,5 @@ export default defineComponent({
         label="Checked?"
       />
     </template>
-  </layout-template>
+  </child-layout>
 </template>
