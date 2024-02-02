@@ -15,7 +15,7 @@ export const routes = Object.freeze([
   {
     path: '/primitive-props',
     name: 'Primitive Props',
-    component: () => import('../views/PrimitivePropView.vue')
+    component: () => import('../views/PrimitivePropsView.vue')
   },
   {
     path: '/shallow-object-prop',
@@ -24,22 +24,22 @@ export const routes = Object.freeze([
       {
         path: '/shallow-object-prop/useModel',
         name: 'Shallow Object Prop with useModel',
-        component: () => import('../views/ShallowObjectPropViewWithUseModel.vue')
+        component: () => import('../views/shallowObject/ShallowObjectPropViewWithUseModel.vue')
       },
       {
         path: '/shallow-object-prop/watch',
         name: 'Shallow Object Prop with watch',
-        component: () => import('../views/ShallowObjectPropViewWithWatch.vue')
+        component: () => import('../views/shallowObject/ShallowObjectPropViewWithWatch.vue')
       },
       {
         path: '/shallow-object-prop/custom',
         name: 'Shallow Object Prop with custom',
-        component: () => import('../views/ShallowObjectPropViewWithCustom.vue')
+        component: () => import('../views/shallowObject/ShallowObjectPropViewWithCustom.vue')
       },
       {
         path: '/shallow-object-prop/custom-composable',
         name: 'Shallow Object Prop with custom composable',
-        component: () => import('../views/ShallowObjectPropViewWithCustomComposable.vue')
+        component: () => import('../views/shallowObject/ShallowObjectPropViewWithCustomComposable.vue')
       }
     ]
   },

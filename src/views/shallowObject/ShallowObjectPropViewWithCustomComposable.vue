@@ -25,9 +25,9 @@
   />
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
-import PropValueDataTable from '@/components/PropValueDataTable.vue'
-import ShallowObjectPropWithCustomComposable from '@/components/ShallowObjectPropWithCustomComposable.vue'
+import { defineComponent, reactive } from 'vue'
+import PropValueDataTable from '@/components/helpers/PropValueDataTable.vue'
+import ShallowObjectPropWithCustomComposable from '@/components/shallowObject/ShallowObjectPropWithCustomComposable.vue'
 import useSetTrapRef from '@/composables/useSetTrapRef'
 
 export default defineComponent({

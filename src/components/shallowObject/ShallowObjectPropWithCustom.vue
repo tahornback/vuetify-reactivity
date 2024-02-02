@@ -1,15 +1,6 @@
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  isReactive,
-  isRef,
-  type PropType,
-  reactive,
-  ref,
-  watch
-} from 'vue'
-import LayoutTemplate from '@/components/LayoutTemplate.vue'
+import { computed, defineComponent, isReactive, isRef, type PropType, reactive, ref, watch } from 'vue'
+import LayoutTemplate from '@/components/helpers/LayoutTemplate.vue'
 import type { ShallowObjectExampleModelValue, WatchTriggers } from '@/types'
 
 export default defineComponent({

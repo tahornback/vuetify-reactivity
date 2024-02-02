@@ -1,5 +1,5 @@
 import { defineComponent, ref } from 'vue'
-import PrimitiveProp from '@/components/PrimitiveProp.vue'
+import PrimitiveProps from '@/components/PrimitiveProps.vue'
 import { shortenIndent } from '@/util'
 
 export const primitivePropsDemo = ({
@@ -8,10 +8,10 @@ export const primitivePropsDemo = ({
   boolProp = ref(false)
 } = {}) => {
   const demoComponent = defineComponent({
-    components: { PrimitiveProp },
+    components: { PrimitiveProps },
     template: shortenIndent(
         `
-      <PrimitiveProp
+      <PrimitiveProps
         v-model:string-prop="stringProp"
         v-model:number-prop="numProp"
         v-model:boolean-prop="boolProp"

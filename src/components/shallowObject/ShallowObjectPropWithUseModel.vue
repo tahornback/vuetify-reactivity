@@ -1,20 +1,10 @@
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  isReactive,
-  isRef,
-  type PropType,
-  reactive,
-  type Ref,
-  useModel,
-  watch
-} from 'vue'
-import LayoutTemplate from '@/components/LayoutTemplate.vue'
+import { computed, defineComponent, isReactive, isRef, type PropType, reactive, type Ref, useModel, watch } from 'vue'
+import LayoutTemplate from '@/components/helpers/LayoutTemplate.vue'
 import type { ShallowObjectExampleModelValue, WatchTriggers } from '@/types'
 
 export default defineComponent({
-  name: 'ShallowObjectPropWithWatch',
+  name: 'ShallowObjectPropWithUseModel',
   components: { LayoutTemplate },
   props: {
     modelValue: {
@@ -25,13 +15,8 @@ export default defineComponent({
       })
     }
   },
-  emits: ['update:modelValue'],
-  setup (props, { emit }) {
+  setup (props) {
     const modelValueModel: Ref<ShallowObjectExampleModelValue> = useModel(props, 'modelValue')
-    watch(modelValueModel.value, () => {
-      // This emit isn't necessary since you end up modifying the same object reference anyway
-      emit('update:modelValue', modelValueModel.value)
-    })
     const trackedValues = computed(() => [
       {
         name: 'props',
@@ -65,40 +50,28 @@ export default defineComponent({
     watch(
       modelValueModel,
       () => {
-        watchTriggers.push({
-          variable: 'modelValueModel',
-          deep: true
-        })
+        watchTriggers.push({ variable: 'modelValueModel', deep: true })
       },
       { deep: true }
     )
     watch(
       modelValueModel,
       () => {
-        watchTriggers.push({
-          variable: 'modelValueModel',
-          deep: false
-        })
+        watchTriggers.push({ variable: 'modelValueModel', deep: false })
       },
       { deep: false }
     )
     watch(
       modelValueModel.value,
       () => {
-        watchTriggers.push({
-          variable: 'modelValueModel.value',
-          deep: false
-        })
+        watchTriggers.push({ variable: 'modelValueModel.value', deep: false })
       },
       { deep: false }
     )
     watch(
       props.modelValue,
       () => {
-        watchTriggers.push({
-          variable: 'props.modelValue',
-          deep: false
-        })
+        watchTriggers.push({ variable: 'props.modelValue', deep: false })
       },
       { deep: false }
     )

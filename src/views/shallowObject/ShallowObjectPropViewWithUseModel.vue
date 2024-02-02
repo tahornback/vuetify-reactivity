@@ -1,28 +1,33 @@
 <template>
-  <p>This example creates a local copy of the object in the child (with JSON parse/stringify) and emits an event when modified.</p>
+  <p>
+    This example uses `useModel` to handle v-model changes. This alone is not adequate for object
+    models as `useModel` only tracks the root object, not any of the keys within it, and so
+    `update:useModel` only emits when the root is replaced. Reactivity appears to work in this case,
+    since you end up modifying the same object instance.
+  </p>
   <prop-value-data-table
     :models="models"
-    table-name="Shallow Object only with custom"
+    table-name="Shallow Object only with useModel"
   />
   <prop-value-data-table
     :models="events"
     table-name="modelValue update events"
   />
   <v-divider class="my-3" />
-  <shallow-object-prop-with-custom
+  <shallow-object-prop-with-use-model
     v-model="parentProp"
     @update:model-value="updateModelValueHandler"
   />
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
-import PropValueDataTable from '@/components/PropValueDataTable.vue'
-import ShallowObjectPropWithCustom from '@/components/ShallowObjectPropWithCustom.vue'
+import { defineComponent, reactive } from 'vue'
+import PropValueDataTable from '@/components/helpers/PropValueDataTable.vue'
+import ShallowObjectPropWithUseModel from '@/components/shallowObject/ShallowObjectPropWithUseModel.vue'
 import useSetTrapRef from '@/composables/useSetTrapRef'
 
 export default defineComponent({
   components: {
-    ShallowObjectPropWithCustom,
+    ShallowObjectPropWithUseModel,
     PropValueDataTable
   },
   emits: ['show-snackbar'],
@@ -34,6 +39,7 @@ export default defineComponent({
       foo: 'parent bar',
       fizz: 'parent buzz'
     })
+
     const models = [
       {
         name: 'parentProp',
@@ -45,7 +51,7 @@ export default defineComponent({
     const events = reactive([])
 
     function updateModelValueHandler (x: any) {
-      console.log('ShallowObjectPropViewWithCustom received v-model update', x)
+      console.log('ShallowObjectPropViewWithUseModel received v-model update', x)
       // want to display point-in-time value
       events.push({ name: 'modelValue', value: JSON.stringify(x) })
     }

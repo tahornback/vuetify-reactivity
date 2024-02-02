@@ -1,6 +1,6 @@
 <script>
 import { defineComponent, ref } from 'vue'
-import LayoutTemplate from '@/components/LayoutTemplate.vue'
+import LayoutTemplate from '@/components/helpers/LayoutTemplate.vue'
 
 export default defineComponent({
   components: { LayoutTemplate },

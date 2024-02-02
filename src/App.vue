@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 import PageNav from '@/PageNav.vue'
-import { ref, watch, watchEffect } from 'vue'
+import { ref, watchEffect } from 'vue'
 
 const snackDisplayTime = ref(5000)
 const snackText = ref('')

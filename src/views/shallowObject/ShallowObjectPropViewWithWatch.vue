@@ -1,33 +1,33 @@
 <template>
   <p>
-    This example uses `useModel` to handle v-model changes. This alone is not adequate for object
-    models as `useModel` only tracks the root object, not any of the keys within it, and so
-    `update:useModel` only emits when the root is replaced. Reactivity appears to work in this case,
-    since you end up modifying the same object instance.
+    This example uses `useModel` plus `watch`. Although in this case `update:modelValue` emits on
+    every model key update, the emitted event does not cause the parent to update model keys. In
+    essence, it works identically to the "Shallow Object Prop with useModel" with decoy events to
+    make you think it is working as expected.
   </p>
   <prop-value-data-table
     :models="models"
-    table-name="Shallow Object only with useModel"
+    table-name="Shallow Object with additional support"
   />
   <prop-value-data-table
     :models="events"
     table-name="modelValue update events"
   />
   <v-divider class="my-3" />
-  <shallow-object-prop-with-use-model
+  <shallow-object-prop-with-watch
     v-model="parentProp"
     @update:model-value="updateModelValueHandler"
   />
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
-import PropValueDataTable from '@/components/PropValueDataTable.vue'
-import ShallowObjectPropWithUseModel from '@/components/ShallowObjectPropWithUseModel.vue'
+import { defineComponent, reactive } from 'vue'
+import PropValueDataTable from '@/components/helpers/PropValueDataTable.vue'
+import ShallowObjectPropWithWatch from '@/components/shallowObject/ShallowObjectPropWithWatch.vue'
 import useSetTrapRef from '@/composables/useSetTrapRef'
 
 export default defineComponent({
   components: {
-    ShallowObjectPropWithUseModel,
+    ShallowObjectPropWithWatch,
     PropValueDataTable
   },
   emits: ['show-snackbar'],
@@ -39,22 +39,23 @@ export default defineComponent({
       foo: 'parent bar',
       fizz: 'parent buzz'
     })
-
     const models = [
       {
         name: 'parentProp',
         value: parentProp
       }
     ]
-
-    // This list is expected to remain empty
     const events = reactive([])
 
     function updateModelValueHandler (x: any) {
-      console.log('ShallowObjectPropViewWithUseModel received v-model update', x)
-      // want to display point-in-time value
-      events.push({ name: 'modelValue', value: JSON.stringify(x) })
+      console.log('ShallowObjectPropViewWithWatch received v-model update', x)
+      // want to display point-in-time
+      events.push({
+        name: 'modelValue',
+        value: JSON.stringify(x)
+      })
     }
+
     return {
       parentProp,
       models,

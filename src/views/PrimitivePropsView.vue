@@ -15,13 +15,13 @@
   <component :is="demoComponent" />
 </template>
 <script lang="ts">
-import PrimitiveProp from '@/components/PrimitiveProp.vue'
+import PrimitiveProps from '@/components/PrimitiveProps.vue'
 import { defineComponent, ref } from 'vue'
-import PropValueDataTable from '@/components/PropValueDataTable.vue'
+import PropValueDataTable from '@/components/helpers/PropValueDataTable.vue'
 import { primitivePropsDemo } from '@/components/demoComponents'
 
 export default defineComponent({
-  components: { PropValueDataTable, PrimitiveProp },
+  components: { PropValueDataTable, PrimitiveProps },
   setup () {
     const stringProp = ref('parent value')
     const numProp = ref(1)

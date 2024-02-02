@@ -1,33 +1,28 @@
 <template>
-  <p>
-    This example uses `useModel` plus `watch`. Although in this case `update:modelValue` emits on
-    every model key update, the emitted event does not cause the parent to update model keys. In
-    essence, it works identically to the "Shallow Object Prop with useModel" with decoy events to
-    make you think it is working as expected.
-  </p>
+  <p>This example creates a local copy of the object in the child (with JSON parse/stringify) and emits an event when modified.</p>
   <prop-value-data-table
     :models="models"
-    table-name="Shallow Object with additional support"
+    table-name="Shallow Object only with custom"
   />
   <prop-value-data-table
     :models="events"
     table-name="modelValue update events"
   />
   <v-divider class="my-3" />
-  <shallow-object-prop-with-watch
+  <shallow-object-prop-with-custom
     v-model="parentProp"
     @update:model-value="updateModelValueHandler"
   />
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
-import PropValueDataTable from '@/components/PropValueDataTable.vue'
-import ShallowObjectPropWithWatch from '@/components/ShallowObjectPropWithWatch.vue'
+import { defineComponent, reactive } from 'vue'
+import PropValueDataTable from '@/components/helpers/PropValueDataTable.vue'
+import ShallowObjectPropWithCustom from '@/components/shallowObject/ShallowObjectPropWithCustom.vue'
 import useSetTrapRef from '@/composables/useSetTrapRef'
 
 export default defineComponent({
   components: {
-    ShallowObjectPropWithWatch,
+    ShallowObjectPropWithCustom,
     PropValueDataTable
   },
   emits: ['show-snackbar'],
@@ -45,17 +40,15 @@ export default defineComponent({
         value: parentProp
       }
     ]
+
+    // This list is expected to remain empty
     const events = reactive([])
 
     function updateModelValueHandler (x: any) {
-      console.log('ShallowObjectPropViewWithWatch received v-model update', x)
-      // want to display point-in-time
-      events.push({
-        name: 'modelValue',
-        value: JSON.stringify(x)
-      })
+      console.log('ShallowObjectPropViewWithCustom received v-model update', x)
+      // want to display point-in-time value
+      events.push({ name: 'modelValue', value: JSON.stringify(x) })
     }
-
     return {
       parentProp,
       models,
