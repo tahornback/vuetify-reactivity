@@ -6,11 +6,22 @@
   </h1>
   <slot name="info" />
   <pre><code><slot name="code">{{ component.template }}</slot></code></pre>
-  <template v-if="$slots.parentData">
+  <template v-if="$slots.parentData || models || events">
     <h2 class="pt-2">
       Parent Data
     </h2>
-    <slot name="parentData" />
+    <slot name="parentData">
+      <prop-value-data-table
+        v-if="models"
+        :models="models"
+        table-name="Parent models"
+      />
+      <prop-value-data-table
+        v-if="events"
+        :models="events"
+        table-name="Parent caught events"
+      />
+    </slot>
   </template>
   <v-divider class="my-3" />
   <slot name="child">
@@ -20,9 +31,13 @@
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
+import type { PropValue } from '@/types'
+import PropValueDataTable from '@/components/helpers/PropValueDataTable.vue'
 
 defineProps<{
-  component: any
+  component: any,
+  models?: PropValue[]
+  events?: any[]
 }>()
 
 const route = useRoute()
