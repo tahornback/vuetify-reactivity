@@ -1,8 +1,8 @@
 <script lang="ts">
-import { computed, defineComponent, isReactive, isRef, type PropType, reactive, watch } from 'vue'
+import { computed, defineComponent, isReactive, isRef, type PropType } from 'vue'
 import ChildLayout from '@/components/helpers/ChildLayout.vue'
 import useObjectModel from '@/composables/useObjectModel'
-import type { ShallowObjectExampleModelValue, WatchTriggers } from '@/types'
+import type { ShallowObjectExampleModelValue } from '@/types'
 
 export default defineComponent({
   name: 'ShallowObjectPropWithCustomComposable',
@@ -49,39 +49,6 @@ export default defineComponent({
       }
     ])
 
-    const watchTriggers: WatchTriggers[] = reactive([])
-
-    watch(
-      modelValueModel,
-      () => {
-        watchTriggers.push({
-          variable: 'modelValueModel',
-          deep: true
-        })
-      },
-      { deep: true }
-    )
-    watch(
-      modelValueModel,
-      () => {
-        watchTriggers.push({
-          variable: 'modelValueModel',
-          deep: false
-        })
-      },
-      { deep: false }
-    )
-    watch(
-      props.modelValue,
-      () => {
-        watchTriggers.push({
-          variable: 'props.modelValue',
-          deep: false
-        })
-      },
-      { deep: false }
-    )
-
     function onClick () {
       modelValueModel.value = {
         foo: 'child bar',
@@ -92,7 +59,6 @@ export default defineComponent({
     return {
       modelValueModel,
       trackedValues,
-      watchTriggers,
       onClick
     }
   }
@@ -107,13 +73,6 @@ export default defineComponent({
       <v-data-table
         :items="trackedValues"
         class="mb-2"
-        items-per-page="-1"
-      >
-        <template #bottom />
-      </v-data-table>
-
-      <v-data-table
-        :items="watchTriggers"
         items-per-page="-1"
       >
         <template #bottom />

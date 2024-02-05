@@ -60,28 +60,6 @@ export default defineComponent({
 
     const watchTriggers: WatchTriggers[] = reactive([])
 
-    watch(
-      modelValueModel,
-      () => {
-        watchTriggers.push({ variable: 'modelValueModel', deep: true })
-      },
-      { deep: true }
-    )
-    watch(
-      modelValueModel,
-      () => {
-        watchTriggers.push({ variable: 'modelValueModel', deep: false })
-      },
-      { deep: false }
-    )
-    watch(
-      props.modelValue,
-      () => {
-        watchTriggers.push({ variable: 'props.modelValue', deep: false })
-      },
-      { deep: false }
-    )
-
     function onClick () {
       modelValueModel.value = {
         foo: 'child bar',

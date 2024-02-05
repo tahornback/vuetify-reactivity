@@ -2,6 +2,7 @@
 import { defineComponent, type Ref, useModel } from 'vue'
 import ChildLayout from '@/components/helpers/ChildLayout.vue'
 import PropValueDataTable from '@/components/helpers/PropValueDataTable.vue'
+import type { PropValue } from '@/types'
 
 export default defineComponent({
   name: 'PrimitiveProps',
@@ -24,7 +25,7 @@ export default defineComponent({
     const stringPropModel: Ref<string> = useModel(props, 'stringProp')
     const numberPropModel: Ref<number> = useModel(props, 'numberProp')
     const booleanPropModel: Ref<boolean> = useModel(props, 'booleanProp')
-    const models = [
+    const models: PropValue[] = [
       { name: 'stringPropModel', value: stringPropModel },
       { name: 'numberPropModel', value: numberPropModel },
       { name: 'booleanPropModel', value: booleanPropModel }
