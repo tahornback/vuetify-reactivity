@@ -27,7 +27,7 @@ export const shallowObjectPropDemo = ({
   updateModelValueHandler ??= function updateModelValueHandler (x: any) {
     console.log(`${componentName.name} received v-model update`, x)
     // want to display point-in-time value
-    events.push({ name: 'modelValue', value: JSON.stringify(x) })
+    events.push({ name: 'update:modelValue', value: JSON.stringify(x) })
   }
 
   const demoComponent = defineComponent({
@@ -38,7 +38,6 @@ export const shallowObjectPropDemo = ({
         v-model="parentProp"
         @update:model-value="updateModelValueHandler"
       />
-      <div>{{$data.parentProp}}</div>
     `),
     data: () => ({
       parentProp,

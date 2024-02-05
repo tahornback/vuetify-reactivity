@@ -1,5 +1,9 @@
 <template>
-  <route-layout :component="demoComponent">
+  <route-layout
+    :component="demoComponent"
+    :models
+    :events
+  >
     <template #info>
       <p>
         This example uses `useModel` to handle v-model changes. This alone is not adequate for object
@@ -8,29 +12,17 @@
         since you end up modifying the same object instance.
       </p>
     </template>
-    <template #parentData>
-      <prop-value-data-table
-        :models="models"
-        table-name="Shallow Object only with useModel"
-      />
-      <prop-value-data-table
-        :models="events"
-        table-name="modelValue update events"
-      />
-    </template>
   </route-layout>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import PropValueDataTable from '@/components/helpers/PropValueDataTable.vue'
 import ShallowObjectPropWithUseModel from '@/components/shallowObject/ShallowObjectPropWithUseModel.vue'
 import RouteLayout from '@/components/helpers/RouteLayout.vue'
 import { shallowObjectPropDemo } from '@/components/shallowObject/shallowObjectDemoComponent'
 
 export default defineComponent({
   components: {
-    RouteLayout,
-    PropValueDataTable
+    RouteLayout
   },
   emits: ['show-snackbar'],
   setup () {

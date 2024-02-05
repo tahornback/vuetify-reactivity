@@ -5,7 +5,8 @@
     </slot>
   </h1>
   <slot name="info" />
-  <pre><code><slot name="code">{{ component.template }}</slot></code></pre>
+  <pre v-if="component"><code><slot name="code">{{ component.template }}</slot></code></pre>
+  <!--  My initial concept for this parentData slot is a bit more complex than I want to tackle atm -->
   <template v-if="$slots.parentData || models || events">
     <h2 class="pt-2">
       Parent Data
@@ -35,7 +36,7 @@ import type { PropValue } from '@/types'
 import PropValueDataTable from '@/components/helpers/PropValueDataTable.vue'
 
 defineProps<{
-  component: any,
+  component?: any,
   models?: PropValue[]
   events?: any[]
 }>()

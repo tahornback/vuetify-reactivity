@@ -1,5 +1,9 @@
 <template>
-  <route-layout :component="demoComponent">
+  <route-layout
+    :component="demoComponent"
+    :models
+    :events
+  >
     <template #info>
       <p>
         This example uses `useModel` plus `watch`. Although in this case `update:modelValue` emits on
@@ -8,29 +12,17 @@
         make you think it is working as expected.
       </p>
     </template>
-    <template #parentData>
-      <prop-value-data-table
-        :models="models"
-        table-name="Shallow Object with additional support"
-      />
-      <prop-value-data-table
-        :models="events"
-        table-name="modelValue update events"
-      />
-    </template>
   </route-layout>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import PropValueDataTable from '@/components/helpers/PropValueDataTable.vue'
 import ShallowObjectPropWithWatch from '@/components/shallowObject/ShallowObjectPropWithWatch.vue'
 import RouteLayout from '@/components/helpers/RouteLayout.vue'
 import { shallowObjectPropDemo } from '@/components/shallowObject/shallowObjectDemoComponent'
 
 export default defineComponent({
   components: {
-    RouteLayout,
-    PropValueDataTable
+    RouteLayout
   },
   emits: ['show-snackbar'],
   setup () {

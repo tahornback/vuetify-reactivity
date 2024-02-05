@@ -9,5 +9,8 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest'
+  },
+  rules:{
+    'vuetify/no-deprecated-props': 0
   }
 }

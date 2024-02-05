@@ -1,5 +1,9 @@
 <template>
-  <route-layout :component="demoComponent">
+  <route-layout
+    :component="demoComponent"
+    :models
+    :events
+  >
     <template #info>
       <p>
         ✅
@@ -20,8 +24,9 @@
         table-name="modelValue update events"
       />
       <v-btn
-        variant="text"
+        class="my-2"
         @click="onClick"
+        text="Replace parentProp.value"
       />
     </template>
   </route-layout>
