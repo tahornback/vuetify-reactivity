@@ -9,3 +9,8 @@ export interface WatchTriggers {
 }
 
 export type UpdateModelValueHandler = (x: any) => void
+
+export interface PropValue {
+    name: string
+    value: any
+}

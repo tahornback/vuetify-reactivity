@@ -27,15 +27,12 @@
   </v-data-table>
 </template>
 <script setup lang="ts">
+import type { PropValue } from '@/types'
+
 interface Props {
-  models: {
-    name: string
-    value: any
-  }[]
+  models: PropValue[]
   tableName?: string
 }
-// TODO: public interface for data table to make sure headers match
-
 withDefaults(defineProps<Props>(), {
   models: () => [],
   tableName: undefined
