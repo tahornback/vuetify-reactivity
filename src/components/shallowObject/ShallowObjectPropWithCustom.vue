@@ -4,7 +4,7 @@ import ChildLayout from '@/components/helpers/ChildLayout.vue'
 import type { ShallowObjectExampleModelValue, WatchTriggers } from '@/types'
 
 export default defineComponent({
-  name: 'ShallowObjectPropWithUseCustom',
+  name: 'ShallowObjectPropWithCustom',
   components: { ChildLayout },
   props: {
     modelValue: {

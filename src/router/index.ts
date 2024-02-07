@@ -40,6 +40,11 @@ export const routes = Object.freeze([
         path: '/shallow-object-prop/custom-composable',
         name: 'Shallow Object Prop with custom composable',
         component: () => import('../views/shallowObject/ShallowObjectPropViewWithCustomComposable.vue')
+      },
+      {
+        path: '/shallow-object-prop/parent-has-list',
+        name: 'Parent has a list of shallow objects',
+        component: () => import('../views/shallowObject/ListOfShallowObjectsView.vue')
       }
     ]
   },
