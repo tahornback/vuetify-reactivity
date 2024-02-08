@@ -13,7 +13,7 @@
   </RouteLayout>
 </template>
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, reactive } from 'vue'
 import ShallowObjectPropWithCustom from '@/components/shallowObject/ShallowObjectPropWithCustom.vue'
 import RouteLayout from '@/components/helpers/RouteLayout.vue'
 import useSetTrapReactive from '@/composables/useSetTrapReactive'
@@ -25,7 +25,7 @@ export default defineComponent({
   },
   emits: ['show-snackbar'],
   setup () {
-    const parentProps = useSetTrapReactive([
+    const parentProps = reactive([
       useSetTrapReactive({
         foo: 'parent bar 1',
         fizz: 'parent buzz 1'
