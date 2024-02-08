@@ -1,7 +1,7 @@
 <script lang="ts">
-import { computed, defineComponent, isReactive, isRef, type PropType, reactive, ref, watch } from 'vue'
+import { computed, defineComponent, isReactive, isRef, type PropType, ref, watch } from 'vue'
 import ChildLayout from '@/components/helpers/ChildLayout.vue'
-import type { ShallowObjectExampleModelValue, WatchTriggers } from '@/types'
+import type { ShallowObjectExampleModelValue } from '@/types'
 
 export default defineComponent({
   name: 'ShallowObjectPropWithCustom',
@@ -58,8 +58,6 @@ export default defineComponent({
       }
     ])
 
-    const watchTriggers: WatchTriggers[] = reactive([])
-
     function onClick () {
       modelValueModel.value = {
         foo: 'child bar',
@@ -70,7 +68,6 @@ export default defineComponent({
     return {
       modelValueModel,
       trackedValues,
-      watchTriggers,
       onClick
     }
   }
@@ -83,13 +80,6 @@ export default defineComponent({
       <v-data-table
         :items="trackedValues"
         class="mb-2"
-        items-per-page="-1"
-      >
-        <template #bottom />
-      </v-data-table>
-
-      <v-data-table
-        :items="watchTriggers"
         items-per-page="-1"
       >
         <template #bottom />
